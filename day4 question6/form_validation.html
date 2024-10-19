@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+      h1 {
+        text-align: center;
+        color: red;
+      }
+
+      #form {
+        width: 30%;
+        margin: auto;
+        border: 1px solid rgb(200, 200, 200);
+        padding: 20px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      }
+
+      #form input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 9px 10px;
+        margin: 8px 0px;
+        border: 2px solid rgb(200, 200, 200);
+        background-color: beige;
+      }
+
+      span {
+        color: red;
+      }
+
+      #form input[type="submit"] {
+        color: white;
+        background-color: red;
+        border: 0;
+        border-radius: 7px;
+        padding: 15px !important;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      p {
+        text-align: center;
+        line-height: 3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Form Validation</h1>
+    <div id="form">
+      <form>
+        <div id="form-name">
+          <label for="name">Name:<span>*</span></label
+          ><br />
+          <input
+            type="text"
+            id="name_input"
+            placeholder="Enter Your Name"
+            required
+          /><br />
+          <span class="name-error"></span>
+        </div>
+
+        <div id="form-email">
+          <label for="email">Email:<span>*</span></label
+          ><br />
+          <input
+            type="email"
+            id="email_input"
+            placeholder="Enter Your Email"
+            required
+          /><br />
+          <span class="email-error"></span>
+        </div>
+
+        <div id="form-pass">
+          <label for="password">Password:<span>*</span> </label><br />
+          <input
+            type="password"
+            minlength="8"
+            id="pass_input"
+            placeholder="Enter Password"
+            required
+          /><br />
+          <span class="pass-error"></span>
+        </div>
+
+        <input type="submit" readonly /> <br />
+      </form>
+    </div>
+    <p></p>
+  </body>
+</html>
+
+<script>
+  document.querySelector("form").addEventListener("submit", form_submit);
+  let name_input = document.getElementById("name_input");
+  let email_input = document.getElementById("email_input");
+  let pass_input = document.getElementById("pass_input");
+  let display_input = document.querySelector("p");
+
+  function form_submit() {
+    event.preventDefault();
+
+    if (isAlpha(name_input.value) == false) {
+      document.querySelector(".name-error").innerText = "Invalid Name Input";
+      document.querySelector(".name-error").style.margin = "3px";
+      display_input.innerText = "";
+      return;
+    } else {
+      document.querySelector(".name-error").innerText = "";
+    }
+
+    display_input.innerText = `Name: ${name_input.value} \nEmail: ${email_input.value} \nPassword: *****`;
+  }
+
+  function isAlpha(str) {
+    return /^[A-Za-z\s]+$/.test(str);
+  }
+</script>
